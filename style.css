@@ -71,11 +71,18 @@ h1, h2, h3, h4 {
 }
 
 .section-label {
-    display: block;
-    color: var(--accent);
+    display: inline-block;
+    color: var(--foreground-muted);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.85rem;
-    margin-bottom: 16px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .section-title {
@@ -271,29 +278,58 @@ h1, h2, h3, h4 {
     padding: 40px 0 100px;
 }
 
-.device-tabs {
+.tech-specs-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 8px;
     margin-bottom: 32px;
 }
 
-.device-tab {
-    background: transparent;
-    border: none;
+.tech-spec-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
     color: var(--foreground-muted);
-    padding: 8px 16px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 999px;
-    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
 }
 
-.device-tab.active {
-    background: var(--card-bg);
+.tech-specs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-badge {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--foreground-muted);
+    padding: 6px 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.tech-badge:hover {
     color: var(--foreground);
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.tech-badge svg {
+    color: var(--accent);
+    opacity: 0.8;
 }
 
 .demo-visual {
@@ -346,17 +382,21 @@ h1, h2, h3, h4 {
 }
 
 .feature-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
     padding: 32px;
     display: flex;
     flex-direction: column;
-    transition: background 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .feature-card:hover {
-    background: var(--card-hover);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .feature-header {
@@ -455,11 +495,19 @@ h1, h2, h3, h4 {
 
 .carousel-card {
     min-width: 300px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
     padding: 24px;
     scroll-snap-align: start;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.carousel-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
 }
 
 .carousel-card-image.placeholder {
@@ -493,10 +541,19 @@ h1, h2, h3, h4 {
 }
 
 .testimonial {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
     padding: 32px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.testimonial:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .testimonial-author {
