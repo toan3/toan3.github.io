@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>YouPlay — AI Video Translator</title>
     <meta name="description" content="The native macOS app for AI video translation. Watch YouTube in your language with synchronized dubbing.">
+    <link rel="icon" type="image/png" href="assets/marketing/YouPlay-Logo.png">
     
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,8 +17,7 @@
     <header class="header">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <img src="assets/marketing/YouPlay-Logo.png" alt="YouPlay Logo" class="logo-icon" width="24" height="24">
-                <span>YouPlay</span>
+                <span class="logo-text">YouPlay.</span>
             </a>
             
             <nav class="nav-links">
@@ -37,7 +37,7 @@
             </div>
             
             <h1 class="hero-tagline">Watch videos in<br>your language.</h1>
-            <p class="hero-sub">Native macOS audio dubbing. Offline, fast, and seamless.</p>
+            <p class="hero-sub reveal">Experience YouTube, lectures, and movies with synchronized, natural-sounding AI dubbing. Entirely on-device.</p>
             
             <div class="store-buttons">
                 <a href="https://apps.apple.com/" class="cta-button primary">
@@ -58,32 +58,68 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                 </div>
                 <span class="hero-rating-text">Available on the Mac App Store</span>
+                <div class="hero-tech-specs" style="display: flex; gap: 12px; margin-top: 24px; justify-content: center;">
+                    <span class="tech-badge" style="font-size: 0.75rem; color: var(--foreground-muted); padding: 6px 12px; border-radius: 6px; display: inline-block; background: rgba(255,255,255,0.05); letter-spacing: 0.05em; font-weight: 500;">
+                        APPLE SILICON
+                    </span>
+                    <span class="tech-badge" style="font-size: 0.75rem; color: var(--foreground-muted); padding: 6px 12px; border-radius: 6px; display: inline-block; background: rgba(255,255,255,0.05); letter-spacing: 0.05em; font-weight: 500;">
+                        INTEL MACS
+                    </span>
+                </div>
+            </div>
+            <div class="hero-slider-container">
+                <div class="hero-slider-track" id="hero-slider">
+                    <div class="hero-slide"><img src="assets/marketing/Screenshot-1.png" alt="YouPlay Main Interface"></div>
+                    <div class="hero-slide"><img src="assets/marketing/Screenshot-2.png" alt="YouPlay Settings"></div>
+                    <div class="hero-slide"><img src="assets/marketing/Screenshot-3.png" alt="YouPlay Native UI"></div>
+                </div>
+                <div class="hero-slider-dots" id="hero-slider-dots">
+                    <button class="slider-dot active" aria-label="Slide 1"></button>
+                    <button class="slider-dot" aria-label="Slide 2"></button>
+                    <button class="slider-dot" aria-label="Slide 3"></button>
+                </div>
             </div>
         </section>
 
         <!-- Demo Section -->
         <section class="demo-section">
             <div class="container">
-                <div class="tech-specs-container">
-                    <span class="tech-spec-label">Optimized for:</span>
-                    <div class="tech-specs">
-                        <span class="tech-badge">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                            APPLE SILICON
-                        </span>
-                        <span class="tech-badge">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                            INTEL MACS
-                        </span>
-                    </div>
+                <div class="demo-header reveal" style="text-align: center; margin-bottom: 48px;">
+                    <h2 class="section-title" style="margin-bottom: 16px;">Cinema-grade dubbing.<br>Right on your Mac.</h2>
+                    <p class="section-text" style="margin: 0 auto;">Scroll down to experience real-time AI dubbing.</p>
                 </div>
-                
-                <div class="demo-visual">
-                    <div class="mac-mockup">
-                        <!-- Main App Demo Screenshot -->
-                        <img src="assets/marketing/Screenshot-1.png" alt="YouPlay App Demo" class="demo-screenshot" loading="lazy">
+                <!-- Scrollytelling Section -->
+                <div class="scrollytelling-track reveal" id="dubbing-story-track">
+                    <div class="scrollytelling-sticky">
+                        <div class="mac-mockup story-mockup" style="aspect-ratio: 16/9; position: relative; margin-bottom: 16px;">
+                            
+                            <!-- Base Image -->
+                            <img src="assets/marketing/movie-frame.jpg" alt="Cinematic Chinese Wuxia Scene" class="story-video-bg">
+                            
+                            <!-- Screen Glow for Audio -->
+                            <div class="story-audio-glow"></div>
+
+                            <!-- Subtitles Overlay -->
+                            <div class="story-subtitles">
+                                <span class="sub-zh">你要记住，剑，是活的。</span>
+                                <span class="sub-en">You must remember, the sword is alive.</span>
+                            </div>
+
+                            <!-- Dynamic Island UI -->
+                            <div class="story-dynamic-island">
+                                <div class="island-content">
+                                    <div class="island-icon">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mic-icon"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                                    </div>
+                                    <span class="island-text-processing">Translating audio...</span>
+                                    <span class="island-text-playing">English Dub Playing</span>
+                                    <div class="island-waveform">
+                                        <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="demo-caption">Real demo — YouPlay generating live synchronized dubbing</p>
                 </div>
             </div>
         </section>
@@ -91,151 +127,57 @@
         <!-- Main Features -->
         <section id="features" class="section">
             <div class="container">
-                <span class="section-label">// why youplay</span>
-                <h2 class="section-title">Break language barriers.<br>Without breaking immersion.</h2>
-                <p class="section-text">YouPlay is built natively for macOS. It utilizes available captions to synthesize natural-sounding audio that aligns with your video playback. Watch tech talks, tutorials, and entertainment more comfortably.</p>
+                <span class="section-label reveal" style="transition-delay: 0.1s;">// why youplay</span>
+                <h2 class="section-title reveal" style="transition-delay: 0.2s;">Break language barriers.<br>Without breaking immersion.</h2>
+                <p class="section-text reveal" style="transition-delay: 0.3s;">YouPlay seamlessly bridges the language gap by translating captions into perfectly timed, studio-quality audio. It’s like having a personal interpreter for every video.</p>
                 
                 <div class="features-grid">
                     <!-- Feature 1 -->
-                    <div class="feature-card">
+                    <div class="feature-card reveal" style="transition-delay: 0.1s;">
                         <div class="feature-header">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-                            </div>
-                            <h3 class="feature-title">Native Dubbing</h3>
+                            <div class="feature-index">01</div>
+                            <h3 class="feature-title">Zero Latency</h3>
                         </div>
-                        <p class="feature-desc">Generates audio designed to align with the timing of the original video.</p>
-                        <img src="assets/marketing/Screenshot-2.png" alt="Native Dubbing" class="feature-screenshot" loading="lazy">
+                        <p class="feature-desc">Designed specifically for macOS. Optimized audio processing ensures a buttery smooth viewing experience with zero latency.</p>
                     </div>
                     
                     <!-- Feature 2 -->
-                    <div class="feature-card">
+                    <div class="feature-card reveal" style="transition-delay: 0.2s;">
                         <div class="feature-header">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                            </div>
-                            <h3 class="feature-title">Lightning Fast</h3>
+                            <div class="feature-index">02</div>
+                            <h3 class="feature-title">100% On-Device</h3>
                         </div>
-                        <p class="feature-desc">Optimized audio processing helps maintain a smooth viewing experience.</p>
-                        <div class="feature-media-placeholder">
-                            <span>Performance Metric Image here</span>
-                        </div>
+                        <p class="feature-desc">Supports offline voice models that process audio entirely on-device. Your data never leaves your Mac.</p>
                     </div>
 
                     <!-- Feature 3 -->
-                    <div class="feature-card">
+                    <div class="feature-card reveal" style="transition-delay: 0.3s;">
                         <div class="feature-header">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                            </div>
-                            <h3 class="feature-title">Verified Captions</h3>
+                            <div class="feature-index">03</div>
+                            <h3 class="feature-title">Contextual Mixing</h3>
                         </div>
-                        <p class="feature-desc">Relies on source or platform-translated captions as the foundation for dubbing.</p>
-                        <div class="feature-media-placeholder">
-                            <span>Caption Selection GIF here</span>
-                        </div>
+                        <p class="feature-desc">Plays dubbed audio seamlessly alongside the original track, letting you hear the original emotion and context.</p>
                     </div>
 
                     <!-- Feature 4 -->
-                    <div class="feature-card">
+                    <div class="feature-card reveal" style="transition-delay: 0.4s;">
                         <div class="feature-header">
-                            <div class="feature-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                            </div>
-                            <h3 class="feature-title">Mac Native Design</h3>
+                            <div class="feature-index">04</div>
+                            <h3 class="feature-title">Frame-Accurate Sync</h3>
                         </div>
-                        <p class="feature-desc">Designed specifically for macOS to look and feel like a native app.</p>
-                        <img src="assets/marketing/Screenshot-3.png" alt="Mac Native Design" class="feature-screenshot" loading="lazy">
+                        <p class="feature-desc">Relies on source or platform-translated captions as the foundation for dubbing, guaranteeing accurate timing.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- More Features Carousel -->
-        <section class="section">
-            <div class="container">
-                <span class="section-label">// and there's more</span>
-                <div class="carousel-header">
-                    <span class="carousel-count"><strong>10+</strong> features</span>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"></path></svg></button>
-                        <button class="carousel-btn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg></button>
-                    </div>
-                </div>
-                
-                <div class="carousel-track">
-                    <!-- Carousel Card 1 -->
-                    <div class="carousel-card">
-                        <div class="carousel-card-image placeholder">Image/GIF</div>
-                        <div class="carousel-card-content">
-                            <h4 class="carousel-card-title">Audio Mixing</h4>
-                            <p class="carousel-card-desc">Plays dubbed audio alongside the original track for context.</p>
-                        </div>
-                    </div>
-                    <!-- Carousel Card 2 -->
-                    <div class="carousel-card">
-                        <div class="carousel-card-image placeholder">Image/GIF</div>
-                        <div class="carousel-card-content">
-                            <h4 class="carousel-card-title">Background Playback</h4>
-                            <p class="carousel-card-desc">Keep listening even when the window is minimized.</p>
-                        </div>
-                    </div>
-                    <!-- Carousel Card 3 -->
-                    <div class="carousel-card">
-                        <div class="carousel-card-image placeholder">Image/GIF</div>
-                        <div class="carousel-card-content">
-                            <h4 class="carousel-card-title">Privacy Options</h4>
-                            <p class="carousel-card-desc">Supports offline voice models that process audio entirely on-device.</p>
-                        </div>
-                    </div>
-                    <!-- Carousel Card 4 -->
-                    <div class="carousel-card">
-                        <div class="carousel-card-image placeholder">Image/GIF</div>
-                        <div class="carousel-card-content">
-                            <h4 class="carousel-card-title">Custom Voices</h4>
-                            <p class="carousel-card-desc">Choose from multiple high-quality voices and accents.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Cases -->
-        <section id="use-cases" class="social-proof-section section">
-            <div class="container">
-                <span class="section-label">// who is it for</span>
-                <h2 class="section-title">Perfect for daily learning and entertainment</h2>
-                <p class="section-text">Bridge the language gap without reading subtitles.</p>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial">
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar placeholder" style="background:transparent; font-size:2rem; display:flex; align-items:center; justify-content:center;">🎓</div>
-                            <div class="testimonial-author-text">
-                                <span class="testimonial-name">Language Learners</span>
-                            </div>
-                        </div>
-                        <p class="testimonial-body">Immerse yourself in content while bridging the gap between your native language and the one you're learning. Listen, pause, and compare.</p>
-                    </div>
-                    <div class="testimonial">
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar placeholder" style="background:transparent; font-size:2rem; display:flex; align-items:center; justify-content:center;">💻</div>
-                            <div class="testimonial-author-text">
-                                <span class="testimonial-name">Professionals & Students</span>
-                            </div>
-                        </div>
-                        <p class="testimonial-body">Consume global tutorials, tech talks, and lectures faster. Keep your eyes on the code or presentation instead of constantly reading subtitles.</p>
-                    </div>
-                    <div class="testimonial">
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar placeholder" style="background:transparent; font-size:2rem; display:flex; align-items:center; justify-content:center;">🍿</div>
-                            <div class="testimonial-author-text">
-                                <span class="testimonial-name">Entertainment Seekers</span>
-                            </div>
-                        </div>
-                        <p class="testimonial-body">Enjoy international vlogs, documentaries, and shows with continuous audio dubbing. Relax and follow the story effortlessly.</p>
-                    </div>
-                </div>
+        <!-- Use Cases Banner -->
+        <section id="use-cases" class="use-cases-banner">
+            <div class="container" style="display: flex; align-items: center; justify-content: center; text-align: center; gap: 16px; flex-wrap: wrap; padding: 60px 0;">
+                <span style="color: var(--foreground-muted); font-size: 0.95rem;">Built for</span>
+                <span class="use-case-tag">🎓 Language Learners</span>
+                <span class="use-case-tag">💻 Professionals</span>
+                <span class="use-case-tag">🍿 Entertainment</span>
             </div>
         </section>
     </main>
@@ -269,5 +211,84 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('dubbing-story-track');
+            
+            if (track) {
+                const updateScroll = () => {
+                    const rect = track.getBoundingClientRect();
+                    const trackTop = rect.top;
+                    const trackHeight = rect.height;
+                    const windowHeight = window.innerHeight;
+                    
+                    let progress = 0;
+                    if (trackTop <= 0) {
+                        const totalScrollable = trackHeight - windowHeight;
+                        if (totalScrollable > 0) {
+                            progress = Math.abs(trackTop) / totalScrollable;
+                        }
+                    }
+                    
+                    progress = Math.max(0, Math.min(1, progress));
+                    track.style.setProperty('--scroll', progress);
+                };
+
+                window.addEventListener('scroll', () => {
+                    requestAnimationFrame(updateScroll);
+                });
+                // Initialize
+                updateScroll();
+            }
+
+            // Hero Slider Logic
+            const slider = document.getElementById('hero-slider');
+            const dots = document.querySelectorAll('#hero-slider-dots .slider-dot');
+            
+            if (slider && dots.length > 0) {
+                // Update dots on scroll
+                slider.addEventListener('scroll', () => {
+                    const scrollLeft = slider.scrollLeft;
+                    const slideWidth = slider.offsetWidth;
+                    const activeIndex = Math.round(scrollLeft / slideWidth);
+                    
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === activeIndex);
+                    });
+                }, { passive: true });
+                
+                // Click dots to scroll
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        slider.scrollTo({
+                            left: index * slider.offsetWidth,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            }
+
+            // Scroll Reveal Logic
+            const revealElements = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px"
+                });
+                
+                revealElements.forEach(el => revealObserver.observe(el));
+            } else {
+                revealElements.forEach(el => el.classList.add('active'));
+            }
+        });
+    </script>
 </body>
 </html>
