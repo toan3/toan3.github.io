@@ -81,7 +81,7 @@
                     <p class="section-text" style="margin: 0 auto;">Scroll down to experience real-time AI dubbing.</p>
                 </div>
                 <!-- Scrollytelling Section -->
-                <div class="scrollytelling-track reveal" id="dubbing-story-track">
+                <div class="scrollytelling-track reveal" id="dubbing-story-track" data-state="zh">
                     <div class="scrollytelling-sticky">
                         <div class="mac-mockup story-mockup" style="aspect-ratio: 16/9; position: relative; margin-bottom: 16px;">
                             
@@ -93,8 +93,11 @@
 
                             <!-- Subtitles Overlay -->
                             <div class="story-subtitles">
-                                <span class="sub-zh">你要记住，剑，是活的。</span>
-                                <span class="sub-en">You must remember, the sword is alive.</span>
+                                <span class="sub-line sub-zh">你要记住，剑，是活的。</span>
+                                <span class="sub-line sub-en">You must remember, the sword is alive.</span>
+                                <span class="sub-line sub-es">Debes recordar, la espada está viva.</span>
+                                <span class="sub-line sub-fr">Tu dois te rappeler, l'épée est vivante.</span>
+                                <span class="sub-line sub-ja">覚えておけ、剣は生きている。</span>
                             </div>
 
                             <!-- Dynamic Island UI -->
@@ -103,14 +106,50 @@
                                     <div class="island-icon">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mic-icon"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
                                     </div>
-                                    <span class="island-text-processing">Translating audio...</span>
-                                    <span class="island-text-playing">English Dub Playing</span>
+                                    <span class="island-text-processing">Processing...</span>
+                                    <span class="island-text-playing"></span>
                                     <div class="island-waveform">
                                         <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Video Controls UI -->
+                            <div class="video-controls-overlay">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <div class="controls-row">
+                                    <div class="controls-left">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                        <span class="time-stamp">01:14:23 / 02:18:45</span>
+                                    </div>
+                                    <div class="controls-right">
+                                        <div class="audio-track-selector">
+                                            <svg class="speaker-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                                            <div class="track-names">
+                                                <span class="track-name track-zh">Original (ZH)</span>
+                                                <span class="track-name track-en">English</span>
+                                                <span class="track-name track-es">Spanish</span>
+                                                <span class="track-name track-fr">French</span>
+                                                <span class="track-name track-ja">Japanese</span>
+                                            </div>
+                                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- Scroll Steps -->
+                    <div class="scroll-steps">
+                        <div class="scroll-step" data-step="zh"></div>
+                        <div class="scroll-step" data-step="processing"></div>
+                        <div class="scroll-step" data-step="en"></div>
+                        <div class="scroll-step" data-step="es"></div>
+                        <div class="scroll-step" data-step="fr"></div>
+                        <div class="scroll-step" data-step="ja"></div>
                     </div>
                 </div>
             </div>
@@ -208,6 +247,7 @@
             const track = document.getElementById('dubbing-story-track');
             
             if (track) {
+                // Keep the progress update for any continuous animations if needed
                 const updateScroll = () => {
                     const rect = track.getBoundingClientRect();
                     const trackTop = rect.top;
@@ -229,8 +269,29 @@
                 window.addEventListener('scroll', () => {
                     requestAnimationFrame(updateScroll);
                 });
-                // Initialize
                 updateScroll();
+
+                // Setup Intersection Observer for the scroll steps
+                const steps = track.querySelectorAll('.scroll-step');
+                const langText = document.getElementById('island-lang-text');
+                
+                if ('IntersectionObserver' in window && steps.length > 0) {
+                    // We want to trigger when the step passes the middle of the screen
+                    const stepObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const state = entry.target.getAttribute('data-step');
+                                track.setAttribute('data-state', state);
+                            }
+                        });
+                    }, {
+                        root: null,
+                        rootMargin: '-50% 0px -50% 0px', // Trigger at the 50% mark of viewport
+                        threshold: 0
+                    });
+
+                    steps.forEach(step => stepObserver.observe(step));
+                }
             }
 
             // Hero Slider Logic

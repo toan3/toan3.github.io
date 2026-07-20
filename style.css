@@ -744,9 +744,19 @@ h1, h2, h3, h4 {
 
 /* Scrollytelling Section */
 .scrollytelling-track {
-    height: 300vh;
     position: relative;
-    --scroll: 0;
+    /* Height is now determined by .scroll-steps */
+}
+
+.scroll-steps {
+    position: relative;
+    z-index: 10;
+    pointer-events: none;
+    margin-top: -80vh; /* Pull steps up over the sticky container */
+}
+
+.scroll-step {
+    height: 100vh;
 }
 
 .scrollytelling-sticky {
@@ -773,34 +783,49 @@ h1, h2, h3, h4 {
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(calc(1 + clamp(0, (var(--scroll) - 0.8) * 5, 1) * 0.05));
-    transition: transform 0.1s linear;
+    transform: scale(1);
+    transition: transform 1s ease;
 }
+
+.scrollytelling-track:not([data-state="zh"]):not([data-state="processing"]) .story-video-bg {
+    transform: scale(1.05); /* Slight zoom in when playing */
+}
+
+.scrollytelling-track[data-state="en"] { --glow-color: rgba(255, 180, 140, 0.5); }
+.scrollytelling-track[data-state="es"] { --glow-color: rgba(160, 220, 255, 0.5); }
+.scrollytelling-track[data-state="fr"] { --glow-color: rgba(255, 170, 200, 0.5); }
+.scrollytelling-track[data-state="ja"] { --glow-color: rgba(210, 160, 255, 0.5); }
 
 .story-audio-glow {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    box-shadow: inset 0 0 100px var(--accent-glow);
+    background: radial-gradient(circle at center, transparent 40%, var(--glow-color, rgba(255,255,255,0)) 150%);
+    box-shadow: inset 0 0 150px var(--glow-color, rgba(255,255,255,0));
     pointer-events: none;
-    opacity: calc(clamp(0, (var(--scroll) - 0.6) * 5, 1));
-    animation: pulse-glow 2s infinite alternate;
+    opacity: 0;
+    transition: opacity 0.5s ease, background 1.5s ease, box-shadow 1.5s ease;
+    mix-blend-mode: screen;
 }
 
-@keyframes pulse-glow {
-    from { box-shadow: inset 0 0 50px var(--accent-glow); }
-    to { box-shadow: inset 0 0 120px var(--accent-glow); }
+.scrollytelling-track:not([data-state="zh"]):not([data-state="processing"]) .story-audio-glow {
+    animation: pulse-glow-opacity 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+}
+
+@keyframes pulse-glow-opacity {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
 }
 
 .story-subtitles {
     position: absolute;
-    bottom: 40px;
+    bottom: 90px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
 }
 
-.sub-zh, .sub-en {
+.sub-line {
     position: absolute;
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
@@ -812,15 +837,40 @@ h1, h2, h3, h4 {
     backdrop-filter: blur(4px);
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
 }
 
-.sub-zh {
-    opacity: calc(1 - clamp(0, (var(--scroll) - 0.4) * 5, 1));
+.scrollytelling-track[data-state="zh"] .sub-zh,
+.scrollytelling-track[data-state="processing"] .sub-zh {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.sub-en {
-    opacity: calc(clamp(0, (var(--scroll) - 0.6) * 5, 1));
-    color: #ffd1b3;
+.scrollytelling-track[data-state="en"] .sub-en {
+    opacity: 1;
+    transform: translateY(0);
+    color: #ffebd9; /* Pastel Orange */
+}
+
+.scrollytelling-track[data-state="es"] .sub-es {
+    opacity: 1;
+    transform: translateY(0);
+    color: #e6f7ff; /* Pastel Blue */
+}
+
+.scrollytelling-track[data-state="fr"] .sub-fr {
+    opacity: 1;
+    transform: translateY(0);
+    color: #ffe6f0; /* Pastel Pink */
+}
+
+.scrollytelling-track[data-state="ja"] .sub-ja {
+    opacity: 1;
+    transform: translateY(0);
+    color: #f2e6ff; /* Pastel Purple */
 }
 
 .story-dynamic-island {
@@ -831,14 +881,29 @@ h1, h2, h3, h4 {
     background: #000;
     border-radius: 999px;
     height: 40px;
-    width: calc(210px + clamp(0, (var(--scroll) - 0.4) * 5, 1) * 70px);
+    width: 140px; /* Base width */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-top: calc(-60px + clamp(0, (var(--scroll) - 0.1) * 10, 1) * 60px);
+    margin-top: -60px; /* Initially hidden */
     box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
     color: white;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrollytelling-track[data-state="processing"] .story-dynamic-island,
+.scrollytelling-track[data-state="en"] .story-dynamic-island,
+.scrollytelling-track[data-state="es"] .story-dynamic-island,
+.scrollytelling-track[data-state="fr"] .story-dynamic-island,
+.scrollytelling-track[data-state="ja"] .story-dynamic-island {
+    margin-top: 0;
+}
+
+.scrollytelling-track:not([data-state="zh"]):not([data-state="processing"]) .story-dynamic-island {
+    width: 155px; /* Expanded for playing text + waveform */
+    /* Dynamic Island now glows with the language color */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 0 1px var(--glow-color, rgba(255,255,255,0.2)), 0 0 15px var(--glow-color, rgba(0,0,0,0));
 }
 
 .island-content {
@@ -858,21 +923,44 @@ h1, h2, h3, h4 {
     font-family: ui-monospace, SFMono-Regular, monospace;
     font-size: 0.85rem;
     color: var(--foreground-muted);
-    opacity: calc(1 - clamp(0, (var(--scroll) - 0.4) * 5, 1));
+    opacity: 0;
     position: absolute;
-    left: 42px;
+    left: 38px;
     white-space: nowrap;
+    transition: opacity 0.3s ease;
+}
+
+.scrollytelling-track[data-state="processing"] .island-text-processing {
+    opacity: 1;
 }
 
 .island-text-playing {
     font-family: ui-monospace, SFMono-Regular, monospace;
     font-size: 0.85rem;
-    color: var(--foreground);
-    opacity: calc(clamp(0, (var(--scroll) - 0.6) * 5, 1));
+    font-weight: 500;
+    opacity: 0;
     position: absolute;
-    left: 42px;
+    left: 40px;
     white-space: nowrap;
+    transition: opacity 0.3s ease;
 }
+
+.scrollytelling-track:not([data-state="zh"]):not([data-state="processing"]) .island-text-playing {
+    opacity: 1;
+}
+
+/* Dynamic Text Content & Colors */
+.scrollytelling-track[data-state="en"] .island-text-playing { color: #ffebd9; }
+.scrollytelling-track[data-state="en"] .island-text-playing::after { content: "English"; }
+
+.scrollytelling-track[data-state="es"] .island-text-playing { color: #e6f7ff; }
+.scrollytelling-track[data-state="es"] .island-text-playing::after { content: "Spanish"; }
+
+.scrollytelling-track[data-state="fr"] .island-text-playing { color: #ffe6f0; }
+.scrollytelling-track[data-state="fr"] .island-text-playing::after { content: "French"; }
+
+.scrollytelling-track[data-state="ja"] .island-text-playing { color: #f2e6ff; }
+.scrollytelling-track[data-state="ja"] .island-text-playing::after { content: "Japanese"; }
 
 .island-waveform {
     display: flex;
@@ -881,7 +969,12 @@ h1, h2, h3, h4 {
     height: 16px;
     position: absolute;
     right: 16px;
-    opacity: calc(clamp(0, (var(--scroll) - 0.6) * 5, 1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scrollytelling-track:not([data-state="zh"]):not([data-state="processing"]) .island-waveform {
+    opacity: 1;
 }
 
 .island-waveform .bar {
@@ -899,6 +992,137 @@ h1, h2, h3, h4 {
 @keyframes wave {
     0%, 100% { transform: scaleY(0.5); }
     50% { transform: scaleY(1); }
+}
+
+/* Video Controls UI */
+.video-controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+    padding: 24px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0.9;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+}
+
+.progress-fill {
+    width: 50%;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    position: relative;
+}
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: -4px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.controls-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.time-stamp {
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.8;
+}
+
+.controls-right {
+    display: flex;
+    align-items: center;
+}
+
+.audio-track-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    padding: 6px 12px;
+    border-radius: 6px;
+    backdrop-filter: blur(8px);
+    cursor: default;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Glow when switching to AI Dub */
+.scrollytelling-track[data-state="en"] .audio-track-selector {
+    background: rgba(255, 180, 140, 0.15);
+    border-color: rgba(255, 180, 140, 0.2);
+    box-shadow: 0 0 20px rgba(255, 180, 140, 0.15);
+    color: #ffebd9;
+}
+.scrollytelling-track[data-state="es"] .audio-track-selector {
+    background: rgba(160, 220, 255, 0.15);
+    border-color: rgba(160, 220, 255, 0.2);
+    box-shadow: 0 0 20px rgba(160, 220, 255, 0.15);
+    color: #e6f7ff;
+}
+.scrollytelling-track[data-state="fr"] .audio-track-selector {
+    background: rgba(255, 170, 200, 0.15);
+    border-color: rgba(255, 170, 200, 0.2);
+    box-shadow: 0 0 20px rgba(255, 170, 200, 0.15);
+    color: #ffe6f0;
+}
+.scrollytelling-track[data-state="ja"] .audio-track-selector {
+    background: rgba(210, 160, 255, 0.15);
+    border-color: rgba(210, 160, 255, 0.2);
+    box-shadow: 0 0 20px rgba(210, 160, 255, 0.15);
+    color: #f2e6ff;
+}
+
+.track-names {
+    position: relative;
+    height: 1.2em;
+    width: 140px;
+    overflow: hidden;
+}
+
+.track-name {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrollytelling-track[data-state="zh"] .track-zh,
+.scrollytelling-track[data-state="processing"] .track-zh,
+.scrollytelling-track[data-state="en"] .track-en,
+.scrollytelling-track[data-state="es"] .track-es,
+.scrollytelling-track[data-state="fr"] .track-fr,
+.scrollytelling-track[data-state="ja"] .track-ja {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @media (max-width: 768px) {
