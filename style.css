@@ -1137,11 +1137,42 @@ h1, h2, h3, h4 {
         gap: 48px;
     }
     .scrollytelling-sticky {
-        top: 20vh;
-        height: 60vh;
+        top: 15vh;
+        height: 70vh;
     }
-    .sub-zh, .sub-en {
+    
+    /* Mobile Video Demo Fixes */
+    .story-mockup {
+        aspect-ratio: 4/3 !important; /* Taller on mobile for more vertical room */
+        border-radius: 16px;
+    }
+    .sub-line {
         font-size: 0.9rem;
+        white-space: normal; /* Allow wrapping */
+        text-align: center;
+        width: 90%;
+    }
+    .story-subtitles {
+        bottom: 70px;
+    }
+    .video-controls-overlay {
+        padding: 16px 16px 12px;
+    }
+    .time-stamp {
+        display: none; /* Hide timestamp on mobile to save space */
+    }
+    .audio-track-selector {
+        padding: 4px 8px;
+    }
+    .track-names {
+        width: 80px; /* Narrower track name */
+    }
+    .track-name {
+        font-size: 0.75rem;
+    }
+    .story-dynamic-island {
+        transform: translateX(-50%) scale(0.8);
+        top: 8px;
     }
 }
 
