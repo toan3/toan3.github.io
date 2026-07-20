@@ -795,6 +795,7 @@ h1, h2, h3, h4 {
 .scrollytelling-track[data-state="es"] { --glow-color: rgba(160, 220, 255, 0.5); }
 .scrollytelling-track[data-state="fr"] { --glow-color: rgba(255, 170, 200, 0.5); }
 .scrollytelling-track[data-state="ja"] { --glow-color: rgba(210, 160, 255, 0.5); }
+.scrollytelling-track[data-state="vi"] { --glow-color: rgba(160, 255, 180, 0.5); }
 
 .story-audio-glow {
     position: absolute;
@@ -873,6 +874,12 @@ h1, h2, h3, h4 {
     color: #f2e6ff; /* Pastel Purple */
 }
 
+.scrollytelling-track[data-state="vi"] .sub-vi {
+    opacity: 1;
+    transform: translateY(0);
+    color: #e6ffe6; /* Pastel Green */
+}
+
 .story-dynamic-island {
     position: absolute;
     top: 16px;
@@ -896,7 +903,8 @@ h1, h2, h3, h4 {
 .scrollytelling-track[data-state="en"] .story-dynamic-island,
 .scrollytelling-track[data-state="es"] .story-dynamic-island,
 .scrollytelling-track[data-state="fr"] .story-dynamic-island,
-.scrollytelling-track[data-state="ja"] .story-dynamic-island {
+.scrollytelling-track[data-state="ja"] .story-dynamic-island,
+.scrollytelling-track[data-state="vi"] .story-dynamic-island {
     margin-top: 0;
 }
 
@@ -961,6 +969,9 @@ h1, h2, h3, h4 {
 
 .scrollytelling-track[data-state="ja"] .island-text-playing { color: #f2e6ff; }
 .scrollytelling-track[data-state="ja"] .island-text-playing::after { content: "Japanese"; }
+
+.scrollytelling-track[data-state="vi"] .island-text-playing { color: #e6ffe6; }
+.scrollytelling-track[data-state="vi"] .island-text-playing::after { content: "Vietnamese"; }
 
 .island-waveform {
     display: flex;
@@ -1096,6 +1107,12 @@ h1, h2, h3, h4 {
     box-shadow: 0 0 20px rgba(210, 160, 255, 0.15);
     color: #f2e6ff;
 }
+.scrollytelling-track[data-state="vi"] .audio-track-selector {
+    background: rgba(160, 255, 180, 0.15);
+    border-color: rgba(160, 255, 180, 0.2);
+    box-shadow: 0 0 20px rgba(160, 255, 180, 0.15);
+    color: #e6ffe6;
+}
 
 .track-names {
     position: relative;
@@ -1120,7 +1137,8 @@ h1, h2, h3, h4 {
 .scrollytelling-track[data-state="en"] .track-en,
 .scrollytelling-track[data-state="es"] .track-es,
 .scrollytelling-track[data-state="fr"] .track-fr,
-.scrollytelling-track[data-state="ja"] .track-ja {
+.scrollytelling-track[data-state="ja"] .track-ja,
+.scrollytelling-track[data-state="vi"] .track-vi {
     opacity: 1;
     transform: translateY(0);
 }
