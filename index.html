@@ -7,7 +7,7 @@
     <meta name="description" content="The native macOS app for AI video translation. Watch YouTube in your language with synchronized dubbing.">
     <link rel="icon" type="image/png" href="assets/marketing/YouPlay-Logo.png">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -78,12 +78,11 @@
             <div class="container">
                 <div class="demo-header reveal" style="text-align: center; margin-bottom: 48px;">
                     <h2 class="section-title" style="margin-bottom: 16px;">Cinema-grade dubbing.<br>Right on your Mac.</h2>
-                    <p class="section-text" style="margin: 0 auto;">Scroll down to experience real-time AI dubbing.</p>
+                    <p class="section-text" style="margin: 0 auto;">Watch it automatically translate and dub in real-time.</p>
                 </div>
-                <!-- Scrollytelling Section -->
-                <div class="scrollytelling-track reveal" id="dubbing-story-track" data-state="zh">
-                    <div class="scrollytelling-sticky">
-                        <div class="mac-mockup story-mockup" style="aspect-ratio: 16/9; position: relative; margin-bottom: 16px;">
+                <!-- Auto-playing Demo Section -->
+                <div class="auto-play-demo reveal" id="dubbing-story-track" data-state="zh">
+                    <div class="mac-mockup story-mockup" style="aspect-ratio: 16/9; position: relative; margin: 0 auto 16px;">
                             
                             <!-- Base Image -->
                             <img src="assets/marketing/demo.JPG" alt="Yao-Chinese Folktales - Nobody (Lang Lang Mountain)" class="story-video-bg">
@@ -143,19 +142,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Scroll Steps -->
-                    <div class="scroll-steps">
-                        <div class="scroll-step" data-step="zh"></div>
-                        <div class="scroll-step" data-step="processing"></div>
-                        <div class="scroll-step" data-step="en"></div>
-                        <div class="scroll-step" data-step="es"></div>
-                        <div class="scroll-step" data-step="fr"></div>
-                        <div class="scroll-step" data-step="ja"></div>
-                        <div class="scroll-step" data-step="vi"></div>
-                    </div>
                 </div>
-            </div>
         </section>
 
         <!-- Main Features -->
@@ -250,51 +237,27 @@
             const track = document.getElementById('dubbing-story-track');
             
             if (track) {
-                // Keep the progress update for any continuous animations if needed
-                const updateScroll = () => {
-                    const rect = track.getBoundingClientRect();
-                    const trackTop = rect.top;
-                    const trackHeight = rect.height;
-                    const windowHeight = window.innerHeight;
-                    
-                    let progress = 0;
-                    if (trackTop <= 0) {
-                        const totalScrollable = trackHeight - windowHeight;
-                        if (totalScrollable > 0) {
-                            progress = Math.abs(trackTop) / totalScrollable;
-                        }
-                    }
-                    
-                    progress = Math.max(0, Math.min(1, progress));
-                    track.style.setProperty('--scroll', progress);
-                };
-
-                window.addEventListener('scroll', () => {
-                    requestAnimationFrame(updateScroll);
-                });
-                updateScroll();
-
-                // Setup Intersection Observer for the scroll steps
-                const steps = track.querySelectorAll('.scroll-step');
-                const langText = document.getElementById('island-lang-text');
+                // Auto-play logic to simulate a video/GIF
+                const states = [
+                    { id: 'zh', duration: 3000 },
+                    { id: 'processing', duration: 1500 },
+                    { id: 'en', duration: 3000 },
+                    { id: 'es', duration: 3000 },
+                    { id: 'fr', duration: 3000 },
+                    { id: 'ja', duration: 3000 },
+                    { id: 'vi', duration: 3000 }
+                ];
                 
-                if ('IntersectionObserver' in window && steps.length > 0) {
-                    // We want to trigger when the step passes the middle of the screen
-                    const stepObserver = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const state = entry.target.getAttribute('data-step');
-                                track.setAttribute('data-state', state);
-                            }
-                        });
-                    }, {
-                        root: null,
-                        rootMargin: '-50% 0px -50% 0px', // Trigger at the 50% mark of viewport
-                        threshold: 0
-                    });
-
-                    steps.forEach(step => stepObserver.observe(step));
-                }
+                let currentIndex = 0;
+                
+                const playNextState = () => {
+                    currentIndex = (currentIndex + 1) % states.length;
+                    track.setAttribute('data-state', states[currentIndex].id);
+                    setTimeout(playNextState, states[currentIndex].duration);
+                };
+                
+                // Start the loop
+                setTimeout(playNextState, states[0].duration);
             }
 
             // Hero Slider Logic
